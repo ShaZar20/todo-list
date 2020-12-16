@@ -4,7 +4,7 @@ const taskRouter = express.Router();
 
 
 taskRouter.post("/", (req, res) => {
-  console.log(req.body);
+  console.log(req.params);
   var newTask = new Task(req.body.newTask);
   newTask.save()
   .then(item => {
@@ -23,9 +23,17 @@ taskRouter.get("/", (req,res) => {
 
   })});
 
-taskRouter.put("/:id", (req,res) => {
+taskRouter.delete("/:id", (req,res) => {
   console.log(req.params);
   Task.findOneAndUpdate({_id: req.params.id},{isValid: false}, (err, result) =>{
+    if(err) console.log(err);
+    res.send(result);
+  });
+});
+
+taskRouter.put("/:id", (req,res) => {
+  console.log(req.body);
+  Task.findOneAndUpdate({_id: req.body.id},{isDone: req.body.isDone}, (err, result) =>{
     if(err) console.log(err);
     res.send(result);
   });

@@ -1,9 +1,8 @@
 import './styles/styles.scss';
 import React from 'react';
 import { Header } from './components/Header';
-import Task from './components/Task';
 import AllTasks from './components/AllTasks';
-import axios from 'axios';
+
 
 
 export default class app extends React.Component {
@@ -17,7 +16,6 @@ export default class app extends React.Component {
       <div className="App">
         <Header />
         <AllTasks />
-        
       </div>
     );
   }

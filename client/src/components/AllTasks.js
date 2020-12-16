@@ -17,20 +17,31 @@ export default class AllTasks extends React.Component{
         this.setState((prevstate) => ({showAddTask: !prevstate.showAddTask}))
     }
     
-    handleDoneTask = (taskToChange) => {
-        const newState = {...this.state};
-        newState.allTasks.map(task => {
-            if(taskToChange === task._id)
-                task.isDone = !task.isDone;
-            return task;
+    handleDoneTask = (idTaskToChange) => {
+        const newTask = {
+            id: "",
+            isDone: undefined
+        }
+        this.state.allTasks.forEach(task => {
+            if(task._id === idTaskToChange) {
+                newTask.id = task._id;
+                newTask.isDone = !task.isDone;
+                }
+            }   
+        );
+        axios.put(`http://localhost:4000/task/${idTaskToChange}`, newTask)
+        .then(res => {
+            var newState = this.state.allTasks;
+            newState.forEach(task => {
+                if(task._id === res.data._id) task.isDone = !task.isDone;;
+                this.setState({allTasks: newState});   
+            });
         })
-
-        this.setState({state: newState})
     }
 
     handleDeleteTask = (idTaskToDelete) => {
         console.log(idTaskToDelete);
-       axios.put(`http://localhost:4000/task/${idTaskToDelete}`)
+       axios.delete(`http://localhost:4000/task/${idTaskToDelete}`)
        .then(res => {
            var newState = this.state.allTasks;
            newState.forEach(task => {
