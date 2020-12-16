@@ -1,0 +1,44 @@
+.AllTasks-container{
+    min-height: 20rem;
+    max-width: 60rem;
+    width: 30%;
+    margin: 0 $l-size;
+    justify-self: center;
+    background-color: $dark-blue;
+    border-radius: 8px;
+
+}
+
+.AllTasks-title_container{
+    padding: $s-size;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AllTasks-title{
+    color: $black;
+    font-weight: bold;
+    font-size: $l-size;
+    // text-decoration: underline;
+    display: flex;
+    justify-content: start;
+}
+
+
+.AllTasks{
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width: 500px){
+    .AllTasks{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .AllTasks-container{
+        margin-bottom: $l-size;
+        width: 85%;
+
+    }
+}
